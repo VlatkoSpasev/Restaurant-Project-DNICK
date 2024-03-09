@@ -2,6 +2,7 @@
 
 ## Команди за миграции
   python3 manage.py makemigrations
+  
   python3 manage.py migrate
 
 ## Команда за креирање на супер корисник преку терминал
