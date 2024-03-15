@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -9,6 +10,9 @@ class Restaurant(models.Model):
     phone = models.CharField(max_length=30)
     email = models.EmailField()
     capacity = models.IntegerField()
+
+    def __str__(self):
+        return self.name
 
 
 class Employee(models.Model):
@@ -26,6 +30,10 @@ class Employee(models.Model):
     date_of_birth = models.DateField()
     position = models.CharField(max_length=3, choices=POSITION_CHOICES)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.name} {self.surname}"
 
 
 class Dish(models.Model):
