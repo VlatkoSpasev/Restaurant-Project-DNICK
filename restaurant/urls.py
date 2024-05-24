@@ -17,7 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth import views
 from django.urls import include, path
-from rest_app.views import add_employee, add_restaurant, index, restaurants, restaurant_detail, dishes, dish_detail
+from django.conf import settings
+from django.conf.urls.static import static
+from rest_app.views import add_employee, add_restaurant, index, restaurants, restaurant_detail, dishes, dish_detail, \
+    edit_restaurant, delete_restaurant
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,10 +28,12 @@ urlpatterns = [
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('index/', index, name="index"),
     path('restaurants/', restaurants, name="restaurants"),
-    path('restaurant_details/<int:restaurant_id>/', restaurant_detail, name="restaurant details"),
+    path('restaurant_details/<restaurant_id>/', restaurant_detail, name="restaurant details"),
+    path('restaurant/edit/<id>/', edit_restaurant, name="edit restaurant"),
+    path('restaurant/delete/<id>/', delete_restaurant, name="delete restaurant"),
     path('dishes/', dishes, name="dishes"),
     path('dish_deteils/<int:dish_id>', dish_detail, name="Dish details"),
     path('add_restaurant/', add_restaurant, name="Add restaurant"),
     path('add_employee/', add_employee, name="Add employee"),
 
-]
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
